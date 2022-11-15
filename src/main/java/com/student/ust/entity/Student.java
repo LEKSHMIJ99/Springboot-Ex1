@@ -1,8 +1,10 @@
 package com.student.ust.entity;
 import lombok.Data;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 @Entity
 @Data
@@ -18,7 +20,12 @@ public class Student {
     private int rollno;
     private LocalDateTime createDate;
     private LocalDateTime modifyDate;
+    @Email
 
+    @Column(name = "email",unique = true)
+    private String email;
+    @Column(name = "password")
+    private String password;
 
     @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY,mappedBy = "student")
     private Set<Books> booksSet;
